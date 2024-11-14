@@ -39,7 +39,7 @@ app.get('/restaurants', async (req, res) => {
 //Exercise 2: Get Restaurant by ID
 // /restaurants/details/1
 
-async function fetchById(id) {
+async function fetchByIds(id) {
   let query = 'select * from restaurants where id=?';
   let response = await db.all(query, [id]);
   return { restaurants: response };
@@ -47,7 +47,7 @@ async function fetchById(id) {
 app.get('/restaurants/details/:id', async (req, res) => {
   try {
     let id = req.params.id;
-    let result = await fetchById(id);
+    let result = await fetchByIds(id);
     if (result.restaurants.length === 0) {
       res.status(404).json({ messsage: 'No Restaurant Found by id: ' + id });
     }
